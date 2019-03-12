@@ -44,34 +44,37 @@ public:
 		Hash_Node<K, V> * temp = new Hash_Node<K, V>(key, value);
 
 		//apply hash function to the index of the inserting key and value pair
-		std::hash<K> string_hash;
-		int hash_index = string_hash(key);
+		std::hash<K> hash_function;
+		int hash_index = hash_function(key);
 		hash_index = hash_index % Table_Size;
 
 
 		if (Table[hash_index] == NULL)
 		{
-			Table[hash_index] = temp;
+			return Table[hash_index] = temp;
 		}
-		else { Table[hash_index] = temp->next; }
-
-
-		current_node = Table[hash_index]
-			while (current_node != NULL)
+		Hash_Node<K, V>* current = Table[hash_index];
+		while (current != NULL)
+		{
+			if (temp->key == current->key)
 			{
-				// if matches overwrite
-				// if doesn't match then iterate and not null
-				// if at end then store it.
-				if (current_node->key )
+				return current->value= temp->value;
+			}
+			else
+			{
+				if (current->next == nullptr)
 				{
-					Table[hash_index] = temp;
+					current->next = temp;
 				}
 				else
 				{
-					current_node = temp->next;
+					current = current->next;
 				}
 			}
 
+		}
+
+		
 	}
 	~Hash_Table()
 	{
