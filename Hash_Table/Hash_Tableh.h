@@ -39,7 +39,7 @@ public:
 		}
 
 	}
-	void insert(const K & key, const V & value)
+	Hash_Node<K,V>* insert( K  key,  V value)
 	{
 		Hash_Node<K, V> * temp = new Hash_Node<K, V>(key, value);
 
@@ -58,7 +58,7 @@ public:
 		{
 			if (temp->key == current->key)
 			{
-				return current->value= temp->value;
+				current->value= temp->value;
 			}
 			else
 			{
@@ -71,10 +71,23 @@ public:
 					current = current->next;
 				}
 			}
-
 		}
+		return temp;
+	}
+	void Display()
+	{
+		for (int i = 0; i < Table_Size; ++i)
+		{
+			if (Table[i] == NULL) continue;
+			Hash_Node<K, V>* temp = Table[i];
 
-		
+			std::cout <<"Index: "<<i<<" Key: "<< temp->key <<" Value: "<< temp->value << std::endl;
+		}
+		/*
+		do
+		{
+			std::cout << "Index: " << i << " Key: " << temp->key << " Value: " << temp->value << std::endl;
+		} while (Table[i]->next != nullptr);*/
 	}
 	~Hash_Table()
 	{
