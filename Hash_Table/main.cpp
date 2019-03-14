@@ -6,7 +6,7 @@
 int main()
 {
 	Hash_Table<int, int> Hash_Table;
-
+	Hash_Table.setTable_Size();
 	Hash_Table.insert(1, 1);
 	Hash_Table.display();
 	std::cout << std::endl;
@@ -34,6 +34,7 @@ int main()
 	Hash_Table.find(3);
 	Hash_Table.find(2);
 	Hash_Table.find(1);
-	std::cin.get();
+	system("pause");
+ 	std::cin.get();
 	return 0;
 }

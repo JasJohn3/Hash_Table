@@ -40,6 +40,19 @@ public:
 		}
 
 	}
+	void setTable_Size()
+	{
+		int user_input;
+		std::cout << "What size of Table would you like to create?" << std::endl;
+		std::cout << "Enter Size: " << std::flush;
+		std::cin >> user_input;
+		Table_Size = user_input;
+		Table = new Hash_Node<K, V>*[Table_Size];
+		for (int i = 0; i < Table_Size; ++i)
+		{
+			Table[i] = NULL;
+		}
+	}
 	void insert(K  key, V value)
 	{
 
