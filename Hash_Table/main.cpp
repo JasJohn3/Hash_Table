@@ -13,6 +13,7 @@ int main()
 	Hash_Table.insert(4, 4);
 	Hash_Table.insert(5, 5);
 	Hash_Table.insert(6, 2);
+	Hash_Table.insert(1, 3);
 	Hash_Table.Search(6);
 	Hash_Table.Search(5);
 	Hash_Table.Search(4);

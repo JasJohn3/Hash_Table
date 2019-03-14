@@ -96,13 +96,16 @@ public:
 		{
 			if (current->key == key)
 			{
-				std::cout<< current->value << " ";
+				std::cout<<"Found: "<< current->value << " ";
 				flag = true;
 			}
 			current = current->next;
 		}
 		if (!flag)
+		{
 			return current;
+		}
+			
 	}
 	
 
