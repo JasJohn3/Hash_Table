@@ -65,8 +65,6 @@ public:
 			std::hash<K> hash_function;
 			int hash_index = hash_function(key);
 			hash_index = hash_index % Table_Size;			*/
-		
-
 
 		std::hash<K> hash_function;
 		int hash_index = hash_function(key);
@@ -94,13 +92,6 @@ public:
 
 			}
 		}
-
-
-
-
-
-
-		
 	}
 
 		
