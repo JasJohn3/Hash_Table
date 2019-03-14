@@ -92,7 +92,6 @@ public:
 				}
 				current = current->next;
 
-
 			}
 		}
 
