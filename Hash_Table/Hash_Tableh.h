@@ -40,19 +40,19 @@ public:
 		}
 
 	}
-	Hash_Node<K, V>* insert(K  key, V value)
+	void insert(K  key, V value)
 	{
-		Hash_Node<K, V> * temp = new Hash_Node<K, V>(key, value);
+		 Hash_Node<K, V> * temp = new Hash_Node<K, V>(key, value);
 
 		//apply hash function to the index of the inserting key and value pair
-		/*
-		//temporary test function for insert order
-		int hash_index = key % Table_Size;
+		/*	temporary test function for collision testing
+			int hash_index = key % Table_Size;				*/
 
-		This is the real hash function for the table.
-		std::hash<K> hash_function;
-		int hash_index = hash_function(key);
-		hash_index = hash_index % Table_Size;*/
+		
+		/*	This is the real hash function for the table.
+			std::hash<K> hash_function;
+			int hash_index = hash_function(key);
+			hash_index = hash_index % Table_Size;			*/
 		
 
 
@@ -61,17 +61,17 @@ public:
 		//added absolute value.  Hash function can return negative values.
 		hash_index = std::abs(hash_index % Table_Size);
 		Hash_Node<K, V>* current = Table[hash_index];
-		Hash_Node<K, V>* previous = NULL;
-		while (current != NULL)
+		Hash_Node<K, V>* previous = nullptr;
+		while (current != nullptr)
 		{
 			previous = current;
 			current = current->next;
 		}
-		if (current == NULL)
+		if (current == nullptr)
 		{
 			current = temp;
 
-			if (previous == NULL)
+			if (previous == nullptr)
 			{
 				Table[hash_index] = current;
 			}
@@ -80,11 +80,13 @@ public:
 				previous->next = current;
 			}
 		}
-		else
+		else if (current->key == temp->key)
 		{
-			current->value = value;
+			current->value = temp->value;
 		}
-		return temp;
+		else { delete temp; }
+
+		
 	}
 
 		
@@ -99,7 +101,7 @@ public:
 		int hash_index = hash_function(key);
 		hash_index = std::abs(hash_index % Table_Size);
 		Hash_Node<K,V>* current = Table[hash_index];
-		while (current != NULL)
+		while (current != nullptr)
 		{
 			if (current->key == key)
 			{
