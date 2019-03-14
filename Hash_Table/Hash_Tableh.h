@@ -46,9 +46,11 @@ public:
 		//apply hash function to the index of the inserting key and value pair
 		/*
 		This is the real hash function for the table.
-
+		std::hash<K> hash_function;
+		int hash_index = hash_function(key);
+		hash_index = hash_index % Table_Size;*/
 		
-		*/
+
 		//temporary test function for insert order
 		int hash_index = key % Table_Size;
 
