@@ -84,7 +84,11 @@ public:
 		{
 			current->value = temp->value;
 		}
-		else { delete temp; }
+		else
+		{
+			temp = nullptr;
+			delete temp;
+		}
 
 		
 	}
