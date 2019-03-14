@@ -4,6 +4,7 @@
 #include <iostream>
 #include <thread>
 #include <string>
+#include<cstdlib>
 template <typename K, typename V>
 struct Hash_Node
 {
@@ -45,15 +46,20 @@ public:
 
 		//apply hash function to the index of the inserting key and value pair
 		/*
+		//temporary test function for insert order
+		int hash_index = key % Table_Size;
+
 		This is the real hash function for the table.
 		std::hash<K> hash_function;
 		int hash_index = hash_function(key);
 		hash_index = hash_index % Table_Size;*/
 		
 
-		//temporary test function for insert order
-		int hash_index = key % Table_Size;
 
+		std::hash<K> hash_function;
+		int hash_index = hash_function(key);
+		//added absolute value.  Hash function can return negative values.
+		hash_index = std::abs(hash_index % Table_Size);
 		Hash_Node<K, V>* current = Table[hash_index];
 		Hash_Node<K, V>* previous = NULL;
 		while (current != NULL)
@@ -84,19 +90,21 @@ public:
 		
 
 
-	Hash_Node<K,V>* Search(K key)
+	Hash_Node<K,V>* find(K key)
 	{
 		bool flag = false;
-		/*std::hash<K> hash_function;
+		/*int hash_index = key % Table_Size;*/
+		
+		std::hash<K> hash_function;
 		int hash_index = hash_function(key);
-		hash_index = hash_index % Table_Size;*/
-		int hash_index = key % Table_Size;
+		hash_index = std::abs(hash_index % Table_Size);
 		Hash_Node<K,V>* current = Table[hash_index];
 		while (current != NULL)
 		{
 			if (current->key == key)
 			{
-				std::cout<<"Found: "<< current->value << " ";
+				std::cout << "Found:" << std::endl;
+				std::cout<< "Key: " << current->key << " " << "Value: " << current->value <<std::endl;
 				flag = true;
 			}
 			current = current->next;

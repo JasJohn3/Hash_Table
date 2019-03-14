@@ -14,12 +14,12 @@ int main()
 	Hash_Table.insert(5, 5);
 	Hash_Table.insert(6, 2);
 	Hash_Table.insert(1, 3);
-	Hash_Table.Search(6);
-	Hash_Table.Search(5);
-	Hash_Table.Search(4);
-	Hash_Table.Search(3);
-	Hash_Table.Search(2);
-	Hash_Table.Search(1);
+	Hash_Table.find(6);
+	Hash_Table.find(5);
+	Hash_Table.find(4);
+	Hash_Table.find(3);
+	Hash_Table.find(2);
+	Hash_Table.find(1);
 	std::cin.get();
 	return 0;
 }
