@@ -89,18 +89,18 @@ public:
 		int hash_index = hash_function(key);
 		hash_index = hash_index % Table_Size;*/
 		int hash_index = key % Table_Size;
-		Hash_Node<K,V>* entry = Table[hash_index];
-		while (entry != NULL)
+		Hash_Node<K,V>* current = Table[hash_index];
+		while (current != NULL)
 		{
-			if (entry->key == key)
+			if (current->key == key)
 			{
-				cout << entry->value << " ";
+				std::cout<< current->value << " ";
 				flag = true;
 			}
-			entry = entry->next;
+			current = current->next;
 		}
 		if (!flag)
-			return -1;
+			return current;
 	}
 	
 
