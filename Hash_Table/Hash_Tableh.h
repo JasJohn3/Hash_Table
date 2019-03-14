@@ -39,56 +39,71 @@ public:
 		}
 
 	}
-	Hash_Node<K,V>* insert( K  key,  V value)
+	Hash_Node<K, V>* insert(K  key, V value)
 	{
 		Hash_Node<K, V> * temp = new Hash_Node<K, V>(key, value);
 
 		//apply hash function to the index of the inserting key and value pair
-		std::hash<K> hash_function;
-		int hash_index = hash_function(key);
-		hash_index = hash_index % Table_Size;
+		/*
+		This is the real hash function for the table.
 
+		
+		*/
+		//temporary test function for insert order
+		int hash_index = key % Table_Size;
 
-		if (Table[hash_index] == NULL)
-		{
-			return Table[hash_index] = temp;
-		}
 		Hash_Node<K, V>* current = Table[hash_index];
+		Hash_Node<K, V>* previous = NULL;
 		while (current != NULL)
 		{
-			if (temp->key == current->key)
+			previous = current;
+			current = current->next;
+		}
+		if (current == NULL)
+		{
+			current = temp;
+
+			if (previous == NULL)
 			{
-				current->value= temp->value;
+				Table[hash_index] = current;
 			}
 			else
 			{
-				if (current->next == nullptr)
-				{
-					current->next = temp;
-				}
-				else
-				{
-					current = current->next;
-				}
+				previous->next = current;
 			}
+		}
+		else
+		{
+			current->value = value;
 		}
 		return temp;
 	}
-	void Display()
-	{
-		for (int i = 0; i < Table_Size; ++i)
-		{
-			if (Table[i] == NULL) continue;
-			Hash_Node<K, V>* temp = Table[i];
 
-			std::cout <<"Index: "<<i<<" Key: "<< temp->key <<" Value: "<< temp->value << std::endl;
-		}
-		/*
-		do
+		
+
+
+	Hash_Node<K,V>* Search(K key)
+	{
+		bool flag = false;
+		/*std::hash<K> hash_function;
+		int hash_index = hash_function(key);
+		hash_index = hash_index % Table_Size;*/
+		int hash_index = key % Table_Size;
+		Hash_Node<K,V>* entry = Table[hash_index];
+		while (entry != NULL)
 		{
-			std::cout << "Index: " << i << " Key: " << temp->key << " Value: " << temp->value << std::endl;
-		} while (Table[i]->next != nullptr);*/
+			if (entry->key == key)
+			{
+				cout << entry->value << " ";
+				flag = true;
+			}
+			entry = entry->next;
+		}
+		if (!flag)
+			return -1;
 	}
+	
+
 	~Hash_Table()
 	{
 		
@@ -99,3 +114,47 @@ public:
 //https://medium.com/@aozturk/simple-hash-map-hash-table-implementation-in-c-931965904250
 #endif
 
+		/*
+
+
+				if (Table[hash_index] == NULL)
+		{
+			return Table[hash_index] = temp;
+		}
+					while (current != NULL)
+			{
+				previous = current;
+				current = current->next;
+				if (temp->key == current->key)
+				{
+					current->value = temp->value;
+				}
+				else
+				{
+					if (current->next == nullptr)
+					{
+						current->next = temp;
+					}
+					else
+					{
+						current = current->next;
+					}
+				}
+			}
+		*/
+		/*void Display()
+		{
+
+
+				if (Table[i] == NULL) continue;
+				Hash_Node<K, V>* temp = Table[i];
+
+				std::cout <<"Index: "<<i<<" Key: "<< temp->key <<" Value: "<< temp->value << std::endl;
+
+			/*
+			do
+			{
+				std::cout << "Index: " << i << " Key: " << temp->key << " Value: " << temp->value << std::endl;
+			} while (Table[i]->next != nullptr);
+		}
+		*/

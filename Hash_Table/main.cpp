@@ -5,20 +5,18 @@
 
 int main()
 {
-	Hash_Table<std::string, char> Hash_Table;
-	Hash_Table.insert("Alpha",'A');
-	Hash_Table.insert("Beta",'B');
-	Hash_Table.insert("Charlie", 'C');
-	Hash_Table.Display();
-	std::cout<<std::endl;
-	Hash_Table.insert("Beta", 'C');
-	Hash_Table.Display();
-	std::cout << std::endl;
-	Hash_Table.insert("Bravo", 'B');
-	Hash_Table.insert("Delta", 'D');
-	Hash_Table.insert("Echo", 'E');
-	Hash_Table.Display();
-	system("pause");
+	Hash_Table<int, int> Hash_Table;
 
+	Hash_Table.insert(1, 1);
+	Hash_Table.insert(2, 1);
+	Hash_Table.insert(3, 1);
+	Hash_Table.insert(4, 1);
+	Hash_Table.insert(5, 1);
+	Hash_Table.Search(5);
+	Hash_Table.Search(4);
+	Hash_Table.Search(3);
+	Hash_Table.Search(2);
+	Hash_Table.Search(1);
+	std::cin.get();
 	return 0;
 }
