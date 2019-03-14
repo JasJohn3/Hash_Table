@@ -42,7 +42,6 @@ public:
 	}
 	void insert(K  key, V value)
 	{
-		 Hash_Node<K, V> * temp = new Hash_Node<K, V>(key, value);
 
 		//apply hash function to the index of the inserting key and value pair
 		/*	temporary test function for collision testing
@@ -61,34 +60,31 @@ public:
 		//added absolute value.  Hash function can return negative values.
 		hash_index = std::abs(hash_index % Table_Size);
 		Hash_Node<K, V>* current = Table[hash_index];
-		Hash_Node<K, V>* previous = nullptr;
+
 		while (current != nullptr)
 		{
-			previous = current;
-			current = current->next;
-		}
-		if (current == nullptr)
-		{
-			current = temp;
-
-			if (previous == nullptr)
+			if (current->key == key)
 			{
-				Table[hash_index] = current;
+				current->value = value;
+			}
+			else if (current->next == nullptr)
+			{
+				current->next = new Hash_Node<K, V>(key, value);
+				break;
 			}
 			else
 			{
-				previous->next = current;
+				current = current->next;
 			}
+
 		}
-		else if (current->key == temp->key)
+		if (current == nullptr)
 		{
-			current->value = temp->value;
+			Table[hash_index] = new Hash_Node<K, V>(key, value);
 		}
-		else
-		{
-			temp = nullptr;
-			delete temp;
-		}
+
+
+
 
 		
 	}
@@ -96,30 +92,46 @@ public:
 		
 
 
-	Hash_Node<K,V>* find(K key)
+	V find(K key)
 	{
-		bool flag = false;
+
 		/*int hash_index = key % Table_Size;*/
 		
 		std::hash<K> hash_function;
 		int hash_index = hash_function(key);
 		hash_index = std::abs(hash_index % Table_Size);
 		Hash_Node<K,V>* current = Table[hash_index];
+		
 		while (current != nullptr)
 		{
 			if (current->key == key)
 			{
 				std::cout << "Found:" << std::endl;
 				std::cout<< "Key: " << current->key << " " << "Value: " << current->value <<std::endl;
-				flag = true;
+				return current->value;
 			}
 			current = current->next;
 		}
-		if (!flag)
-		{
-			return current;
-		}
+		std::cout << key <<" Value Not Found in List!" << std::endl;
+		return NULL;
 			
+	}
+	void display()
+	{
+		for (int i = 0; i < Table_Size; ++i)
+		{
+			Hash_Node<K, V>* current = Table[i];
+			if (Table[i]==NULL)
+			{
+				continue;
+			}
+			while (current!=nullptr)
+			{
+				std::cout << "Index: " << i << " Key: " << current->key << " Value:" << current->value << std::endl;
+				current = current->next;
+			}
+			//std::cout<<"Index: "<<i<<" Key: "<<Table[i]->key<<" Value:"<<Table[i]->value<<std::endl;
+		}
 	}
 	
 
