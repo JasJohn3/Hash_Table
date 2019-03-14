@@ -27,6 +27,7 @@ int main()
 	std::cout << std::endl;
 	Hash_Table.insert(1, 3);
 	Hash_Table.display();
+	std::cout << std::endl;
 	Hash_Table.find(6);
 	Hash_Table.find(5);
 	Hash_Table.find(4);

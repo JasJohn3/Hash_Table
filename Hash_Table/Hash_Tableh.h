@@ -60,28 +60,30 @@ public:
 		//added absolute value.  Hash function can return negative values.
 		hash_index = std::abs(hash_index % Table_Size);
 		Hash_Node<K, V>* current = Table[hash_index];
-
-		while (current != nullptr)
-		{
-			if (current->key == key)
-			{
-				current->value = value;
-			}
-			else if (current->next == nullptr)
-			{
-				current->next = new Hash_Node<K, V>(key, value);
-				break;
-			}
-			else
-			{
-				current = current->next;
-			}
-
-		}
 		if (current == nullptr)
 		{
 			Table[hash_index] = new Hash_Node<K, V>(key, value);
 		}
+		else {
+
+			while (current != nullptr)
+			{
+				if (current->key == key)
+				{
+					current->value = value;
+					break;
+				}
+				else if (current->next == nullptr)
+				{
+					current->next = new Hash_Node<K, V>(key, value);
+				}
+				current = current->next;
+
+
+			}
+		}
+
+
 
 
 
@@ -108,11 +110,9 @@ public:
 			{
 				std::cout << "Found:" << std::endl;
 				std::cout<< "Key: " << current->key << " " << "Value: " << current->value <<std::endl;
-				return current->value;
 			}
-			current = current->next;
+			current = current->next;	
 		}
-		std::cout << key <<" Value Not Found in List!" << std::endl;
 		return NULL;
 			
 	}
