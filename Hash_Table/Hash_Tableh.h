@@ -28,10 +28,8 @@ private:
 	Hash_Node<K, V> **Table;
 	//sets the initial size of the Hash Map
 	int Table_Size = 5;
-	//stores the current size
-	int size;
 
-	Hash_Node<K, V> *dummy;
+
 public:
 	Hash_Table()
 	{
@@ -210,7 +208,7 @@ public:
 
 	~Hash_Table()
 	{
-		delete[] Table;
+		delete [] Table;
 	}
 };
 
